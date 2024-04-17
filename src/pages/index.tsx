@@ -100,15 +100,15 @@ export default function Home() {
             animate={{ opacity: 1 }}
             className={`container p-5 ${
               currentStep === step.id ? 'flex' : 'none'
-            } justify-center gap-4 align-middle h-[70vh] flex-col max-w-screen-md`}
+            } justify-center gap-4 align-middle min-h-[70vh] flex-col max-w-screen-md`}
           >
-            <h3 className='text-3xl font-thin text-white-900'>
-              {step?.question}
+            <h3 className='lg:text-[28px] md:text-[26px] sm:text-[24px] text-[22px] font-thin text-white-900'>
+              {step?.question} 
             </h3>
-            <div className='text-xl font-thin text-white-900 opacity-80'>
+            <div className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[16px] font-thin text-white-900 opacity-80'>
               {step?.desc}
             </div>
-            <p className='text-xl font-thin text-white-900 opacity-80 italic'>
+            <p className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[16px] font-thin text-white-900 opacity-80 italic'>
               {step?.note}
             </p>
             {step?.type === 'dropdown' ? (
@@ -117,7 +117,7 @@ export default function Home() {
                 options={step?.options}
                 onChange={handleChange}
                 placeholder={step?.placeholder}
-                className='text-2xl py-1 px-2 bg-[transparent] border-b-2 border-white outline-none'
+                className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[16px] py-1 px-2 bg-[transparent] border-b-2 border-white outline-none'
                 name={step?.name}
               />
             ) : step?.type === 'multiple' ? (
@@ -155,7 +155,7 @@ export default function Home() {
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
                 handleKeyDown={handleKeyDown}
-                className='text-2xl py-1 px-2 bg-[transparent] border-b-2 border-white outline-none '
+                className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[16px] py-1 px-2 bg-[transparent] border-b-2 border-white outline-none '
               />
             ) : (
               <></>
@@ -165,23 +165,21 @@ export default function Home() {
                 //@ts-ignore
                 onClick={() => handleNext(step?.stepCount) as Step}
                 disabled={!isValid}
-                className={`btn cursor-pointer text-xl rounded py-2 px-3 ${
+                className={`btn cursor-pointer lg:text-[20px] md:text-[20px] sm:text-[18px] text-[16px] rounded py-2 px-3 ${
                   errorMessage && !isValid ? 'bg-[#142a4db3] ' : 'bg-[#0066FF] '
                 }  `}
               >
                 {step?.buttonText} <span className='pl-1'>✓</span>
               </button>
-              <span className='ml-3'>press Enter </span>
+              <span className='ml-3'>press Enter ⏎</span>
             </div>
           </motion.div>
         ))}
       {currentStep > data.length && (
-        <div className='absolute top-1/4 right-1/3 flex justify-center items-center flex-col '>
+        <div className='w-[100%] h-[80vh] flex justify-center items-center flex-col align-middle p-3'>
           <Image src={Done} alt='Submittion Done' width={200} />
-          <p className='text-3xl my-8'>Thank You</p>
-          <p className='text-2xl opacity-40 my-1'>
-            Your responses successfully submitted!
-          </p>
+          <p className='text-3xl my-8'>Thankyou for Submittion</p>
+
         </div>
       )}
     </div>
