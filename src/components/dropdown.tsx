@@ -1,5 +1,5 @@
+import RevealAnimation from '@/utils/Animations';
 import React from 'react';
-
 
 interface Dropdown {
   label?: string;
@@ -13,7 +13,13 @@ interface Dropdown {
   onChange?: any;
   onBlur?: any;
   onFocus?: any;
-  options?:string[];
+  options?: string[];
+  isValid?: boolean;
+  setIsValid?: any;
+  errorMessage?: string;
+  setErrorMessage?: any;
+  handleKeyDown?: any;
+  stepCount?: string | number;
 }
 const Dropdown = ({ ...props }: Dropdown) => {
   const {
@@ -29,7 +35,22 @@ const Dropdown = ({ ...props }: Dropdown) => {
     onFocus,
     isLabelHidden,
     options,
+    setIsValid,
+    errorMessage,
+    setErrorMessage,
+    stepCount,
   } = props;
+
+  const handleSubmitResponse = (name: string, option: any) => {
+    if (!option.target.value.trim()) {
+      setIsValid(false);
+      setErrorMessage('Please fill the field');
+      return;
+    }
+    onChange(name, option.target.value);
+    setErrorMessage('');
+    setIsValid(true);
+  };
   return (
     <div className='flex justify-start align-top flex-col'>
       {!isLabelHidden && label && (
@@ -42,10 +63,10 @@ const Dropdown = ({ ...props }: Dropdown) => {
       )}
       <select
         value={value}
-        onChange={onChange}
+        onChange={(option) => handleSubmitResponse(name as string, option)}
         onBlur={onBlur}
         onFocus={onFocus}
-        className={className||''}
+        className={className || ''}
         required={required}
         disabled={disabled}
         name={name}
@@ -53,15 +74,21 @@ const Dropdown = ({ ...props }: Dropdown) => {
         placeholder={placeholder}
       >
         {options &&
-          //@ts-ignore
           options?.map((option, index) => {
             return (
               <option key={index} className='p-2' value={option}>
-             {option}
+                {option}
               </option>
             );
           })}
       </select>
+      {errorMessage && (
+        <RevealAnimation width='fit-content' durationValue={0.25}>
+          <div className='my-4 text-red-800 text-lg py-1 px-2 rounded  w-fit bg-red-200'>
+            <span>⚠</span> {errorMessage || ' Something went wrong!'}
+          </div>
+        </RevealAnimation>
+      )}
     </div>
   );
 };

@@ -46,9 +46,7 @@ const InputField = ({ ...props }: InputProps) => {
 
 
 
-  //@ts-ignore
-  const handleSubmitResponse = (name, e) => {
-    // e.preventDefault();
+  const handleSubmitResponse = (name:string, e:any) => {
     onChange(name, e.target.value);
     if (!e.target.value.trim()) {
       setIsValid(false);
@@ -94,7 +92,7 @@ const InputField = ({ ...props }: InputProps) => {
             name={name}
             type='text'
             value={value}
-            onChange={(e) => handleSubmitResponse(name, e)}
+            onChange={(e) => handleSubmitResponse(name as string, e)}
             onBlur={onBlur}
             onFocus={onFocus}
             placeholder={placeholder}

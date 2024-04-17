@@ -1,5 +1,4 @@
-import { Inter } from 'next/font/google';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { data } from './api/data';
 import InputField from '@/components/inputField';
@@ -8,87 +7,51 @@ import MultipleChoice from '@/components/multipleChoice';
 import Progress from '@/components/progressBar';
 import Image from 'next/image';
 import Done from '../images/success-svgrepo-com.svg';
-// import { KeyboardReturn} from '@mui/icons-material';
 
-const inter = Inter({ subsets: ['latin'] });
-
-const steps = [
-  { id: 1, question: 'Step 1', field: 'Name' },
-  { id: 2, question: 'Step 2', field: 'Email' },
-  { id: 3, question: 'Step 3', field: 'Password' },
-];
 export default function Home() {
-  //   const [data, setData] = useState({});
-  const [formData, setFormData] = useState({});
-  const [currentStep, setCurrentStep] = useState(1);
-  const [isValid, setIsValid] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
-  console.log(formData);
-  const scrollRef = useRef(null);
-  const prevScrollY = useRef(0);
+  // defined useState
+  const [formData, setFormData] = useState({}); // store user data on object
+  const [currentStep, setCurrentStep] = useState(1); // manage step or question
+  const [isValid, setIsValid] = useState(true); // manage validation
+  const [errorMessage, setErrorMessage] = useState(''); // manage error messages
 
-  const handleScroll = () => {
-    // @ts-ignore
-    const currentScrollY = scrollRef.current.scrollTop;
-    if (currentScrollY > prevScrollY.current) {
-      //@ts-ignore
-      handleNext();
-    } else {
-      handlePrev();
-    }
-    prevScrollY.current = currentScrollY;
-  };
-  useEffect(() => {
-    if (scrollRef.current) {
-      //@ts-ignore
-      scrollRef.current.addEventListener('scroll', handleScroll);
-    }
-    return () => {
-      if (scrollRef.current) {
-        //@ts-ignore
-        scrollRef.current.removeEventListener('scroll', handleScroll);
-      }
-    };
-  });
-  //@ts-ignore
-  const handleChange = (key, value) => {
-    // const { name, value } = e.target;'
+  // handle user response and store on state called formData
+  const handleChange = (key: string, value: string) => {
     setFormData({ ...formData, [key]: value });
   };
 
+  // handle next step or question with proper validation and error handling
   const handleNext = (stepCount: string) => {
-    //@ts-ignore
     if (
       stepCount !== '' &&
       Object.keys(formData)[Number(stepCount) - 1] === ('' || undefined)
     ) {
       setIsValid(false);
-      setErrorMessage('Please fill the fields');
+      setErrorMessage('Required!');
       return;
     }
     setCurrentStep(currentStep + 1);
   };
 
+  // handle previous step or question, *(in future we need to handle previous step)
   const handlePrev = () => {
     setCurrentStep(currentStep - 1);
   };
-  //@ts-ignore
-  const { firstName, lastName, industry, email, role } = formData;
 
-  // @ts-ignore
-  const onSubmit = (e) => {
+  // onSubmit trigger function (not implemented yet)
+  const onSubmit = (e: any) => {
     e.preventDefault();
   };
 
+  // handle user response on press enter button
   const handleKeyDown = (stepCount: string, e: any) => {
     if (e.key === 'Enter') {
-      //@ts-ignore
       handleNext(stepCount);
     }
   };
 
   return (
-    <div className='w-screen flex justify-center align-middle' ref={scrollRef}>
+    <div className='w-screen flex justify-center align-middle'>
       <Progress currentStep={currentStep} totalSteps={data.length} />
       {data &&
         data.map((step) => (
@@ -103,7 +66,7 @@ export default function Home() {
             } justify-center gap-4 align-middle min-h-[70vh] flex-col max-w-screen-md`}
           >
             <h3 className='lg:text-[28px] md:text-[26px] sm:text-[24px] text-[22px] font-thin text-white-900'>
-              {step?.question} 
+              {step?.question}
             </h3>
             <div className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[16px] font-thin text-white-900 opacity-80'>
               {step?.desc}
@@ -113,20 +76,28 @@ export default function Home() {
             </p>
             {step?.type === 'dropdown' ? (
               <Dropdown
-                //@ts-ignore
-                options={step?.options}
+                options={step?.options as string[] | undefined}
                 onChange={handleChange}
                 placeholder={step?.placeholder}
                 className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[16px] py-1 px-2 bg-[transparent] border-b-2 border-white outline-none'
                 name={step?.name}
+                setIsValid={setIsValid}
+                stepCount={step?.stepCount}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
               />
             ) : step?.type === 'multiple' ? (
               <MultipleChoice
-                //   @ts-ignore
-                options={step?.options || []}
+                options={
+                  step?.options as {
+                    serial: string;
+                    value: string;
+                  }[]
+                }
                 moreThenOne={false}
                 onChange={handleChange}
                 name={step?.name}
+                setIsValid={setIsValid}
                 stepCount={step?.stepCount}
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
@@ -134,11 +105,16 @@ export default function Home() {
               />
             ) : step?.type === 'multiple-morethanone' ? (
               <MultipleChoice
-                //   @ts-ignore
-                options={step?.options || []}
+                options={
+                  step?.options as {
+                    serial: string;
+                    value: string;
+                  }[]
+                }
                 moreThenOne={true}
                 onChange={handleChange}
                 name={step?.name}
+                setIsValid={setIsValid}
                 stepCount={step?.stepCount}
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
@@ -162,8 +138,7 @@ export default function Home() {
             )}
             <div>
               <button
-                //@ts-ignore
-                onClick={() => handleNext(step?.stepCount) as Step}
+                onClick={() => handleNext(step?.stepCount as string)}
                 disabled={!isValid}
                 className={`btn cursor-pointer lg:text-[20px] md:text-[20px] sm:text-[18px] text-[16px] rounded py-2 px-3 ${
                   errorMessage && !isValid ? 'bg-[#142a4db3] ' : 'bg-[#0066FF] '
@@ -179,7 +154,6 @@ export default function Home() {
         <div className='w-[100%] h-[80vh] flex justify-center items-center flex-col align-middle p-3'>
           <Image src={Done} alt='Submittion Done' width={200} />
           <p className='text-3xl my-8'>Thankyou for Submittion</p>
-
         </div>
       )}
     </div>
