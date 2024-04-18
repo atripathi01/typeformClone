@@ -77,21 +77,25 @@ export default function Home() {
               currentStep === step.id ? 'flex' : 'none'
             } justify-center gap-4 align-middle min-h-[70vh] flex-col max-w-screen-md`}
           >
-            <h3 className='lg:text-[28px] md:text-[26px] sm:text-[24px] text-[22px] font-thin text-white-900'>
+            {/* question */}
+            <h3 className='lg:text-[28px] md:text-[26px] sm:text-[24px] text-[24px] font-thin text-white-900'>
               {step?.question}
             </h3>
-            <div className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[16px] font-thin text-white-900 opacity-80'>
+            {/* description */}
+            <div className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[18px] font-thin text-white-900 opacity-80'>
               {step?.desc}
             </div>
-            <p className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[16px] font-thin text-white-900 opacity-80 italic'>
+             {/* NOTICE */}
+            <p className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[18px] font-thin text-white-900 opacity-80 italic'>
               {step?.note}
             </p>
+            {/* input */}
             {step?.type === 'dropdown' ? (
               <Dropdown
                 options={step?.options as string[] | undefined}
                 onChange={handleChange}
                 placeholder={step?.placeholder}
-                className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[16px] py-1 px-2 bg-[transparent] border-b-2 border-white outline-none'
+                className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[18px] py-1 px-2 bg-[transparent] border-b-2 border-white outline-none'
                 name={step?.name}
                 setIsValid={setIsValid}
                 stepCount={step?.stepCount}
@@ -143,16 +147,17 @@ export default function Home() {
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
                 handleKeyDown={handleKeyDown}
-                className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[16px] py-1 px-2 bg-[transparent] border-b-2 border-white outline-none '
+                className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[18px] py-1 px-2 bg-[transparent] border-b-2 border-white outline-none '
               />
             ) : (
               <></>
             )}
+            {/* done button or move next button */}
             <div>
               <button
                 onClick={() => handleNext(step?.stepCount as string)}
                 disabled={!isValid}
-                className={`btn cursor-pointer lg:text-[20px] md:text-[20px] sm:text-[18px] text-[16px] rounded py-2 px-3 ${
+                className={`btn cursor-pointer lg:text-[20px] md:text-[20px] sm:text-[18px] text-[18px] rounded py-2 px-3 ${
                   errorMessage && !isValid ? 'bg-[#142a4db3] ' : 'bg-[#0066FF] '
                 }  `}
               >

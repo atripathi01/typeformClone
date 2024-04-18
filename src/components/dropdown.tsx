@@ -51,6 +51,7 @@ const Dropdown = ({ ...props }: Dropdown) => {
     setErrorMessage('');
     setIsValid(true);
   };
+
   return (
     <div className='flex justify-start align-top flex-col'>
       {!isLabelHidden && label && (
@@ -66,7 +67,7 @@ const Dropdown = ({ ...props }: Dropdown) => {
         onChange={(option) => handleSubmitResponse(name as string, option)}
         onBlur={onBlur}
         onFocus={onFocus}
-        className={className || ''}
+        className={className || 'dropdown'}
         required={required}
         disabled={disabled}
         name={name}
@@ -77,7 +78,11 @@ const Dropdown = ({ ...props }: Dropdown) => {
           //@ts-ignore
           options?.map((option, index) => {
             return (
-              <option key={index} style={{background:"#000"}} className='p-2 custom-options' value={option}>
+              <option
+                key={index}
+                className='p-2 custom-options'
+                value={option}
+              >
                 {option}
               </option>
             );

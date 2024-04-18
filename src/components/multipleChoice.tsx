@@ -79,7 +79,10 @@ const MultipleChoice = ({ ...props }: MultipleChoice) => {
   };
   return (
     <div className='multiple-choice-question'>
+
+
       {moreThenOne ? (
+        // multiple choice with more then 1 option user can select
         <>
           <ul className='options-list'>
             {options &&
@@ -114,6 +117,7 @@ const MultipleChoice = ({ ...props }: MultipleChoice) => {
                 </li>
               ))}
           </ul>
+          {/* error message if any error in selection */}
           {errorMessage && (
             <RevealAnimation width='fit-content' durationValue={0.25}>
               <div className='my-4 text-red-800 text-lg py-1 px-2 rounded  w-fit bg-red-200'>
@@ -123,6 +127,7 @@ const MultipleChoice = ({ ...props }: MultipleChoice) => {
           )}
         </>
       ) : (
+        // multiple choice with only 1 option user can select
         <>
           <ul className='options-list'>
             {options &&
@@ -166,6 +171,7 @@ const MultipleChoice = ({ ...props }: MultipleChoice) => {
                 </li>
               ))}
           </ul>
+          {/* error message if any error in selection */}
           {errorMessage && (
             <RevealAnimation width='fit-content' durationValue={0.25}>
               <div className='my-4 text-red-800 text-lg py-1 px-2 rounded  w-fit bg-red-200'>
