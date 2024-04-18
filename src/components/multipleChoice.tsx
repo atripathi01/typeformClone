@@ -86,7 +86,7 @@ const MultipleChoice = ({ ...props }: MultipleChoice) => {
               options?.map((option, index) => (
                 <li
                   key={index}
-                  className={`option relative my-4 text-lg cursor-pointer border-2 w-fit p-1 min-w-72 rounded  ${
+                  className={`option relative my-4 text-lg cursor-pointer border-2 max-w-80 p-1 min-w-72 rounded  ${
                     //@ts-ignore
                     selectedOp.includes(option)
                       ? 'selected border-white-900 bg-[#ffffff1a]'

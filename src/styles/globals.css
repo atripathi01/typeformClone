@@ -5,16 +5,22 @@
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-rgb: 0 , 0,  0;
+  --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 
 body {
   color: rgb(var(--foreground-rgb));
   background:rgb(var(--background-rgb));
+  font-family: var(--system-ui);
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+.custom-options {
+    background-color: #ffffff3f !important;
+    border: 2px solid #fff !important;
 }

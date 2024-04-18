@@ -74,9 +74,10 @@ const Dropdown = ({ ...props }: Dropdown) => {
         placeholder={placeholder}
       >
         {options &&
+          //@ts-ignore
           options?.map((option, index) => {
             return (
-              <option key={index} className='p-2' value={option}>
+              <option key={index} style={{background:"#000"}} className='p-2 custom-options' value={option}>
                 {option}
               </option>
             );

@@ -279,7 +279,7 @@ export const data = [
   {
     id: 6,
     stepCount: 5,
-    question: 'testn, what is your professional goal for the next 12 months?',
+    question: 'What is your professional goal for the next 12 months?',
     desc: '',
     name: 'goal',
     type: 'multiple-morethanone',

@@ -5,8 +5,9 @@ type Props = {
   children: JSX.Element;
   width?: 'fit-content' | '100%';
   durationValue?: number;
+  className?: string;
 };
-const RevealAnimation = ({ children, width = 'fit-content', durationValue }: Props) => {
+const RevealAnimation = ({ children, width = 'fit-content', durationValue, className }: Props) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -19,7 +20,7 @@ const RevealAnimation = ({ children, width = 'fit-content', durationValue }: Pro
   }, [isInView]); // eslint-disable-line
 
   return (
-    <div ref={ref} style={{ width, position: 'relative', overflow: 'hidden' }}>
+    <div ref={ref} className={className} style={{ width, position: 'relative', overflow: 'hidden' }}>
       <motion.div
         animate={mainControls}
         initial='hidden'

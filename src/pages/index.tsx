@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import { data } from './api/data';
 import InputField from '@/components/inputField';
 import Dropdown from '@/components/dropdown';
 import MultipleChoice from '@/components/multipleChoice';
 import Progress from '@/components/progressBar';
 import Image from 'next/image';
-import Done from '../images/success-svgrepo-com.svg';
+import Submited from '../images/submited.gif';
 
 export default function Home() {
   // defined useState
@@ -50,6 +50,8 @@ export default function Home() {
     }
   };
 
+  const mainControls = useAnimation();
+
   return (
     <div className='w-screen flex justify-center align-middle'>
       <Progress currentStep={currentStep} totalSteps={data.length} />
@@ -58,9 +60,19 @@ export default function Home() {
           <motion.div
             style={{ display: currentStep === step.id ? 'flex' : 'none' }}
             key={step.id}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.1 }}
+            initial='hidden'
+            animate='visible'
+            variants={{
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                },
+                hidden: {
+                  opacity: 0,
+                  y: 56,
+                },
+              }}
             className={`container p-5 ${
               currentStep === step.id ? 'flex' : 'none'
             } justify-center gap-4 align-middle min-h-[70vh] flex-col max-w-screen-md`}
@@ -152,7 +164,7 @@ export default function Home() {
         ))}
       {currentStep > data.length && (
         <div className='w-[100%] h-[80vh] flex justify-center items-center flex-col align-middle p-3'>
-          <Image src={Done} alt='Submittion Done' width={200} />
+          <Image src={Submited} alt='Submittion Done' width={300} />
           <p className='text-3xl my-8'>Thankyou for Submittion</p>
         </div>
       )}
