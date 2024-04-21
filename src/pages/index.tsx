@@ -189,7 +189,7 @@ export default function Home() {
           </div>
         )}
       </div>
-      {isLoading && <Loading />}
+      {/* {isLoading && <Loading />} */}
     </>
   );
 }
