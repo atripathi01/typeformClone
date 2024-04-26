@@ -8,6 +8,7 @@ import Progress from '@/components/progressBar';
 import Lottie from 'react-lottie';
 import animationData from '../images/submited.json';
 import Loading from '@/components/loading';
+import MobileField from '@/components/mobileField';
 
 export default function Home() {
   // defined useState
@@ -157,7 +158,19 @@ export default function Home() {
                     handleKeyDown={handleKeyDown}
                     className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[18px] py-1 px-2 bg-[transparent] border-b-2 border-white outline-none '
                   />
-                ) : (
+                ):step?.type === 'phone' ? (
+                  <MobileField 
+                  onChange={handleChange}
+                  placeholder={step?.placeholder}
+                  setIsValid={setIsValid}
+                  name={step?.name}
+                  stepCount={step?.stepCount}
+                  errorMessage={errorMessage}
+                  setErrorMessage={setErrorMessage}
+                  handleKeyDown={handleKeyDown}
+                  className='lg:text-[20px] md:text-[20px] sm:text-[18px] text-[18px] py-1 px-2 bg-[transparent] border-b-2 border-white outline-none '
+                  />
+                  ) : (
                   <></>
                 )}
                 {/* done button or move next button */}

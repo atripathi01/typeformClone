@@ -85,7 +85,7 @@ const MultipleChoice = ({ ...props }: MultipleChoice) => {
         // multiple choice with more then 1 option user can select
         <>
           <ul className='options-list'>
-            {options &&
+            {
               options?.map((option, index) => (
                 <li
                   key={index}

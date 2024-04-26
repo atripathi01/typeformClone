@@ -200,18 +200,14 @@ export const data = [
   {
     id: 1,
     stepCount: '',
-    question: 'Up-skilling requires time commitment',
+    question: 'Please read the following terms and conditions carefully before proceeding:',
     desc: (
       <>
         <p>
-          The GrowthX experience is designed by keeping in mind the working
-          hours founders & full time operators typically work in.
+        By participating in this survey, you agree to abide by all the terms and conditions outlined herein.
         </p>
-        <p>You will spend</p>
-        <ul>
-          <li>- 6 hours/week for the first 5 weeks</li>
-          <li>- 15 hours/week for the last 3 weeks</li>
-        </ul>
+        <p>Your responses will be used for research purposes only and will remain confidential.</p>
+        <p>Completion of this survey implies your consent to the use of your responses for analysis and reporting.</p>
       </>
     ),
     type: 'Iagree',
@@ -249,6 +245,20 @@ export const data = [
   {
     id: 4,
     stepCount: 3,
+    question: 'your phone number?*',
+    desc: '',
+    name: 'phone',
+    type: 'phone',
+    placeholder: 'Phone Number ',
+    buttonText: (
+      <>
+        OK <span className=''></span>
+      </>
+    ),
+  },
+  {
+    id: 5,
+    stepCount: 4,
     question: 'What industry is your company in?*',
     desc: 'We will personalize your learning experience accordingly',
     type: 'dropdown',
@@ -262,8 +272,8 @@ export const data = [
     ),
   },
   {
-    id: 5,
-    stepCount: 4,
+    id: 6,
+    stepCount: 5,
     question: 'Your role in your company?*',
     desc: 'We want to understand how you spend your time right now.',
     type: 'multiple',
@@ -277,8 +287,8 @@ export const data = [
     ),
   },
   {
-    id: 6,
-    stepCount: 5,
+    id: 7,
+    stepCount: 6,
     question: 'What is your professional goal for the next 12 months?',
     desc: '',
     name: 'goal',
@@ -291,8 +301,8 @@ export const data = [
     ),
   },
   {
-    id: 7,
-    stepCount: 6,
+    id: 8,
+    stepCount: 7,
     name: 'email',
     question: 'Email youd like to register with?*',
     desc: 'We will keep all our communications with you through this email. Do check your spam inbox if you can not find our application received email.',

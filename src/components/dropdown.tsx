@@ -65,7 +65,7 @@ const Dropdown = ({ ...props }: Dropdown) => {
       <select
         value={value}
         onChange={(option) => handleSubmitResponse(name as string, option)}
-        onBlur={onBlur}
+        onBlur={onBlur} 
         onFocus={onFocus}
         className={className || 'dropdown'}
         required={required}
@@ -74,8 +74,7 @@ const Dropdown = ({ ...props }: Dropdown) => {
         //@ts-ignore
         placeholder={placeholder}
       >
-        {options &&
-          //@ts-ignore
+        {
           options?.map((option, index) => {
             return (
               <option

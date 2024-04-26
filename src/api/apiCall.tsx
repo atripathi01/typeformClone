@@ -6,4 +6,3 @@ export const fetchCountryCodeandFlags = async () =>
       url: `https://flagcdn.com/en/codes.json`,
       defaultHeaders: true,
     });
-  

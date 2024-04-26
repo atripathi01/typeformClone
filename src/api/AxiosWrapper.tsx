@@ -12,7 +12,6 @@ export type RequestType<T> = {
   body?: T;
   defaultHeaders?: boolean;
 };
-
 export const AxiosWrapper = async <T extends {}, K = Record<string, any>>(
   req: RequestType<K>
 ): Promise<ResponseType<T>> => {
@@ -27,7 +26,7 @@ export const AxiosWrapper = async <T extends {}, K = Record<string, any>>(
         'Content-Type': 'application/json',
         Accept: 'application/json',
       };
-
+ 
     axios({
       //@ts-ignore
       method: method.toLowerCase(),
